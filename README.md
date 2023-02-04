@@ -49,4 +49,4 @@ pip install nonebot_plugin_jrrp2
 /alljrrp获取你的历史平均人品（命令别称："历史人品"，"平均人品"，"平均运势"）
 ```
 
-####部分借鉴：https://github.com/SkyDynamic/nonebot_plugin_jrrp
+部分借鉴：nonebot_plugin_jrrp
