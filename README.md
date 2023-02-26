@@ -7,7 +7,9 @@
 # Nonebot_Plugin_Jrrp2
   
 _✨ 基于OneBot适配器的[NoneBot2](https://v2.nonebot.dev/)每日人品插件 ✨_
-_添加了基于sqlite数据库的历史查询功能_
+
+
+_✨添加了基于sqlite数据库的历史查询功能✨_
   
 </div>
 
@@ -46,7 +48,7 @@ pip install nonebot_plugin_jrrp2
 /jrrp获取你的今日人品（命令别称："jp"，"今日人品"，"今日运势"）
 /weekjrrp获取你的本周平均人品（命令别称："本周人品"，"本周运势"，"周运势"）
 /monthjrrp获取你的本月平均人品（命令别称："本月人品"，"本月运势"，"月运势"）
-/alljrrp获取你的历史平均人品（命令别称："历史人品"，"平均人品"，"平均运势"）
+/alljrrp获取你的历史平均人品（命令别称："总人品"，"平均人品"，"平均运势"）
 ```
 
 部分借鉴：nonebot_plugin_jrrp
