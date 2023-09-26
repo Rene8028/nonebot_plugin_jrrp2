@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "nonebot-plugin-jrrp2"
+version = "2.0"
+description = ""
+authors = ["Rene8028", "UKMeng <ukmengse@gmail.com>"]
+readme = "README.md"
+packages = [{include = "nonebot_plugin_jrrp2"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+nonebot-plugin-send-anything-anywhere = {path = "/Users/ukm/Developer/Python/NoneBot/plugin/nonebot-plugin-send-anything-anywhere", develop = true}
+
+[tool.poetry.group.dev.dependencies]
+nonebot2 = {extras = ["fastapi", "httpx", "webscokets"], version = "^2.1.0"}
+nonebot-adapter-red = "^0.5.0"
+nonebot-adapter-onebot = "^2.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.nonebot]
+adapters = [
+    { name = "RedProtocol", module_name = "nonebot.adapters.red" }
+]
+plugins = [ "nonebot_plugin_jrrp2"]
+plugin_dirs = []
+builtin_plugins = ["echo"]
