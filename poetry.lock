@@ -449,7 +449,7 @@ description = "An adaptor for nonebot2 adaptors"
 optional = false
 python-versions = "^3.8"
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
 anyio = "^3.6.2"
@@ -458,8 +458,10 @@ pydantic = "^1.10.5"
 strenum = "^0.4.8"
 
 [package.source]
-type = "directory"
-url = "../nonebot-plugin-send-anything-anywhere"
+type = "git"
+url = "https://github.com/MountainDash/nonebot-plugin-send-anything-anywhere.git"
+reference = "main"
+resolved_reference = "006984ddc25c19d6b5baa65c22f8f08acca03349"
 
 [[package]]
 name = "nonebot2"
@@ -982,4 +984,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "389e53a8378660479b9d05109dbe2542a423f554dc8d1f1221e19b44dece93f0"
+content-hash = "150ea821f88cf7bbaaee034a1e9e46dc4ff3494e9281bc86c6d3b5935cc310db"

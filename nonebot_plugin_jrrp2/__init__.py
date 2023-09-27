@@ -11,7 +11,10 @@ LastEditTime: 2023-09-26 15:15:46
 import datetime
 from pathlib import Path
 import sqlite3
-from nonebot import on_command
+from nonebot import on_command, require
+
+require("nonebot_plugin_saa")
+
 from nonebot.log import logger
 #from nonebot.adapters.onebot.v11.bot import Bot, Event
 #from nonebot.adapters.onebot.v11.message import Message
