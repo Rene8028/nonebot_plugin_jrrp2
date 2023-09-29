@@ -23,7 +23,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.nonebot]
 adapters = [
-    { name = "RedProtocol", module_name = "nonebot.adapters.red" }
+    { name = "RedProtocol", module_name = "nonebot.adapters.red" },
 ]
 plugins = [ "nonebot_plugin_jrrp2"]
 plugin_dirs = []

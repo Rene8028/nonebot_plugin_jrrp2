@@ -11,7 +11,7 @@ LastEditTime: 2023-09-26 15:15:46
 import datetime
 from pathlib import Path
 import sqlite3
-from nonebot import on_command, require
+from nonebot import on_fullmatch, require, on_command
 
 require("nonebot_plugin_saa")
 
@@ -98,7 +98,7 @@ def same_month(dateString):
     return d1.month == d2.month \
               and d1.year == d2.year
 
-jrrp = on_command("jrrp",None,aliases={'j','今日人品','今日运势'})
+jrrp = on_fullmatch(("jrrp", "j", "今日人品", "今日运势"))
 @jrrp.handle()
 async def jrrp_handle(bot: Bot, event: Event):
     #target = extract_target(event)
