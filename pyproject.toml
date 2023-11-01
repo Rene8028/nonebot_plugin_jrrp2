@@ -8,7 +8,7 @@ packages = [{include = "nonebot_plugin_jrrp2"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-nonebot-plugin-send-anything-anywhere = {git = "https://github.com/MountainDash/nonebot-plugin-send-anything-anywhere.git", rev = "main"}
+nonebot-plugin-send-anything-anywhere = "^0.3.2"
 
 [tool.poetry.group.dev.dependencies]
 nonebot2 = {extras = ["fastapi", "httpx", "webscokets"], version = "^2.1.0"}
