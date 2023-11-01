@@ -1,20 +1,23 @@
 '''
 Descripttion: 
-version: 1.0
+version: 2.0
 Author: Rene8028
 Date: 2022-07-20 21:58:25
-LastEditors: Rene8028
-LastEditTime: 2022-07-20 22:54:46
+LastEditors: UKMeng
+LastEditTime: 2023-09-26 15:15:46
 '''
 
 
 import datetime
 from pathlib import Path
 import sqlite3
-from nonebot import on_command
+from nonebot import on_fullmatch, require, on_command
+
+require("nonebot_plugin_saa")
+
 from nonebot.log import logger
-from nonebot.adapters.onebot.v11.bot import Bot, Event
-from nonebot.adapters.onebot.v11.message import Message
+from nonebot.adapters import Bot, Event
+from nonebot_plugin_saa import Text, extract_target, MessageFactory
 import random
 from datetime import date
 
@@ -91,7 +94,7 @@ def same_month(dateString):
     return d1.month == d2.month \
               and d1.year == d2.year
 
-jrrp = on_command("jrrp",None,aliases={'j','今日人品','今日运势'})
+jrrp = on_fullmatch(("jrrp", "j", "今日人品", "今日运势"))
 @jrrp.handle()
 async def jrrp_handle(bot: Bot, event: Event):
     rnd = random.Random()
@@ -99,19 +102,22 @@ async def jrrp_handle(bot: Bot, event: Event):
     lucknum = rnd.randint(1,100)
     if not select_tb_today(event.get_user_id(),date.today().strftime("%y%m%d")):
         insert_tb(event.get_user_id(),lucknum,date.today().strftime("%y%m%d"))
-    await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您今日的幸运指数是{lucknum}，为"{luck_simple(lucknum)[0]}"，{luck_simple(lucknum)[1]}'))
+    await MessageFactory(f' 您今日的幸运指数是{lucknum}，为"{luck_simple(lucknum)[0]}"，{luck_simple(lucknum)[1]}').send(reply=False, at_sender=True)
+    await jrrp.finish()
 
 alljrrp = on_command("alljrrp",None,aliases={'总人品','平均人品','平均运势'})
 @alljrrp.handle()
 async def alljrrp_handle(bot: Bot, event: Event):
     alldata = select_tb_all(event.get_user_id())
     if alldata == None:
-        await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您还没有过历史人品记录！'))
+        await MessageFactory(f' 您还没有过历史人品记录！').send(at_sender=True)
+        await jrrp.finish()
     times = len(alldata)
     allnum = 0
     for i in alldata:
         allnum = allnum + int(i[1])
-    await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您一共使用了{times}天jrrp，您历史平均的幸运指数是{round(allnum / times,1)}'))
+    await MessageFactory(f' 您一共使用了{times}天jrrp，您历史平均的幸运指数是{round(allnum / times,1)}').send(at_sender=True)
+    await jrrp.finish()
 
 monthjrrp = on_command("monthjrrp",None,aliases={'本月人品','本月运势','月运势'})
 @monthjrrp.handle()
@@ -124,8 +130,10 @@ async def monthjrrp_handle(bot: Bot, event: Event):
             times = times + 1
             allnum = allnum + int(i[1])
     if times == 0:
-        await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您本月还没有过人品记录！'))
-    await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您本月共使用了{times}天jrrp，平均的幸运指数是{round(allnum / times,1)}'))
+        await MessageFactory(f' 您本月还没有过人品记录！').send(at_sender=True)
+        jrrp.finish()
+    await MessageFactory(f' 您本月共使用了{times}天jrrp，平均的幸运指数是{round(allnum / times,1)}').send(at_sender=True)
+    await jrrp.finish()
 
 
 weekjrrp = on_command("weekjrrp",None,aliases={'本周人品','本周运势','周运势'})
@@ -133,7 +141,8 @@ weekjrrp = on_command("weekjrrp",None,aliases={'本周人品','本周运势','�
 async def weekjrrp_handle(bot: Bot, event: Event):
     alldata = select_tb_all(event.get_user_id())
     if alldata == None:
-        await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您还没有过历史人品记录！'))
+        await MessageFactory(f' 您还没有过历史人品记录！').send(at_sender=True)
+        await jrrp.finish()
     times = 0
     allnum = 0
     for i in alldata:
@@ -141,5 +150,7 @@ async def weekjrrp_handle(bot: Bot, event: Event):
             times = times + 1
             allnum = allnum + int(i[1])
     if times == 0:
-        await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您本周还没有过人品记录！'))
-    await jrrp.finish(Message(f'[CQ:at,qq={event.get_user_id()}]您本周共使用了{times}次jrrp，平均的幸运指数是{round(allnum / times,1)}'))
+        await MessageFactory(f' 您本周还没有过人品记录！').send(at_sender=True)
+        await jrrp.finish()
+    await MessageFactory(f' 您本周共使用了{times}次jrrp，平均的幸运指数是{round(allnum / times,1)}').send(at_sender=True)
+    await jrrp.finish()

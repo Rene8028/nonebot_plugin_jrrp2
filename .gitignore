@@ -1,3 +1,8 @@
 setup.py
 /dist
 /nonebot_plugin_jrrp2.egg-info
+/.venv
+/data
+.env
+__pycache__
+.DS_store
